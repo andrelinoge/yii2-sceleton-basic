@@ -10,7 +10,8 @@ use app\assets\AppAsset;
 
 AppAsset::register($this);
 ?>
-<?php $this->beginPage() ?>
+
+<? $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
@@ -18,13 +19,13 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
+    <? $this->head() ?>
 </head>
 <body>
 
-<?php $this->beginBody() ?>
+<? $this->beginBody() ?>
     <div class="wrap">
-        <?php
+        <?
             NavBar::begin([
                 'brandLabel' => 'My Company',
                 'brandUrl' => Yii::$app->homeUrl,
@@ -32,6 +33,7 @@ AppAsset::register($this);
                     'class' => 'navbar-inverse navbar-fixed-top',
                 ],
             ]);
+
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
@@ -40,11 +42,14 @@ AppAsset::register($this);
                     ['label' => 'Contact', 'url' => ['/site/contact']],
                     Yii::$app->user->isGuest ?
                         ['label' => 'Login', 'url' => ['/site/login']] :
-                        ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+                        ['label' => 'Logout (' . Yii::$app->user->identity->name . ')',
                             'url' => ['/site/logout'],
-                            'linkOptions' => ['data-method' => 'post']],
-                ],
-            ]);
+                            'linkOptions' => ['data-method' => 'post']
+                        ]
+                    ],
+                ]
+            );
+            
             NavBar::end();
         ?>
 
@@ -63,7 +68,7 @@ AppAsset::register($this);
         </div>
     </footer>
 
-<?php $this->endBody() ?>
+<? $this->endBody() ?>
 </body>
 </html>
-<?php $this->endPage() ?>
+<? $this->endPage() ?>

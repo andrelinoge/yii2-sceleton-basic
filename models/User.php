@@ -103,9 +103,9 @@ class User extends ActiveRecord implements IdentityInterface
         return static::findOne(['name' => $user_name]);
     }
 
-    public static function findByEmail($user_name)
+    public static function findByEmail($email)
     {
-        return static::findOne(['name' => $user_name]);
+        return static::findOne(['email' => $email]);
     }
 
     public function validatePassword($password)
