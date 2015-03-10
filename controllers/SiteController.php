@@ -8,9 +8,13 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\User;
 
 class SiteController extends Controller
 {
+    const ROLE_ADMIN = 1;
+    const ROLE_USER  = 2;
+
     public function behaviors()
     {
         return [
@@ -20,8 +24,8 @@ class SiteController extends Controller
                 'rules' => [
                     [
                         'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
+                        'allow'   => true,
+                        'roles'   => ['@']
                     ],
                 ],
             ],
@@ -54,14 +58,19 @@ class SiteController extends Controller
 
     public function actionLogin()
     {
-        if (!\Yii::$app->user->isGuest) {
+        if (!\Yii::$app->user->isGuest) 
+        {
             return $this->goHome();
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+
+        if ($model->load(Yii::$app->request->post()) && $model->login()) 
+        {
             return $this->goBack();
-        } else {
+        } 
+        else 
+        {
             return $this->render('login', [
                 'model' => $model,
             ]);
@@ -78,11 +87,14 @@ class SiteController extends Controller
     public function actionContact()
     {
         $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
+        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) 
+        {
             Yii::$app->session->setFlash('contactFormSubmitted');
 
             return $this->refresh();
-        } else {
+        } 
+        else 
+        {
             return $this->render('contact', [
                 'model' => $model,
             ]);

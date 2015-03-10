@@ -46,17 +46,28 @@ $config = [
             'rules'           => require(__DIR__ . '/routing_rules.php')
         ]
     ],
+    'modules' => [
+        'dashboard' => [
+            'class' => 'app\modules\dashboard\Module',
+        ],
+    ],
     'params' => $params,
 ];
 
-if (YII_ENV_DEV) 
+if (YII_ENV_ENV) 
 {
     // configuration adjustments for 'dev' environment
-    $config['bootstrap'][] = 'debug';
-    $config['modules']['debug'] = 'yii\debug\Module';
+    $config['bootstrap'][]      = 'debug';
+    $config['modules']['debug'] = [
+        'class'      => 'yii\debug\Module',
+        'allowedIPs' => ['*'],
+    ];
 
-    $config['bootstrap'][] = 'gii';
-    $config['modules']['gii'] = 'yii\gii\Module';
+    $config['bootstrap'][]    = 'gii';
+    $config['modules']['gii'] = [
+        'class'      => 'yii\gii\Module',
+        'allowedIPs' => ['*'],
+    ];
 }
 
 return $config;
