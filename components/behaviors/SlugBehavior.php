@@ -6,8 +6,9 @@ use yii;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
 use dosamigos\transliterator\TransliteratorHelper;
+use yii\helpers\Inflector;
 
-class Slug extends Behavior
+class SlugBehavior extends Behavior
 {
 	public $source      = 'name';
 	public $destination = 'slug';

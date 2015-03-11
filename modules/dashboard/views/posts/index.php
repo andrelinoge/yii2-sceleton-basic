@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\StringHelper;
 use yii\widgets\Pjax;
+use app\models\PostCategory;
+use yii\helpers\ArrayHelper;
 
 /**
 * @var yii\web\View $this
@@ -17,7 +19,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <? Pjax::begin() ?>
     <div class="col-md-12">
-        <?= $this->render('_search', ['model' => $searchModel]) ?>
 
         <div class="clearfix">
             <p class="pull-left">
@@ -30,7 +31,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'dataProvider' => $dataProvider,
             'filterModel'  => $searchModel,
             'columns' => [
-            
     			'id',
     			'title',
     			[
@@ -39,11 +39,17 @@ $this->params['breadcrumbs'][] = $this->title;
                         return StringHelper::truncate($model->content, 100);
                     }
                 ],
-    			'category_id',
+                'slug',
+                [
+                    'attribute' => 'category_id',
+                    'value'     => function ($model, $key, $index, $column) {
+                        return $model->category->name;
+                    },
+                    'filter' => Html::activeDropDownList($searchModel, 'category_id', ArrayHelper::map(PostCategory::find()->asArray()->all(), 'id', 'name'), ['prompt' => 'Caltegory'])
+                ],
                 [
                     'class' => 'yii\grid\ActionColumn',
                     'urlCreator' => function($action, $model, $key, $index) {
-                        // using the column name as key, not mapping to 'id' like the standard generator
                         $params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key];
                         $params[0] = \Yii::$app->controller->id ? \Yii::$app->controller->id . '/' . $action : $action;
                         return \yii\helpers\Url::toRoute($params);

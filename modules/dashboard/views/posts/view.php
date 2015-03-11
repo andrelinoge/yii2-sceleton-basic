@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = 'View';
         'attributes' => [
     		'id',
     		'title',
+            'slug',
     		'content:ntext',
     		'category_id',
     		'created_at',

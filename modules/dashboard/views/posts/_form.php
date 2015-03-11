@@ -26,6 +26,7 @@ use app\models\PostCategory;
 
         
 	<?= $form->field($model, 'title')->textInput(['maxlength' => 255]) ?>
+    <?= $form->field($model, 'slug')->textInput(['maxlength' => 255]) ?>
 	<?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 	<?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map(PostCategory::find()->asArray()->all(), 'id', 'name'), ['prompt' => 'Caltegory']) ?>
 

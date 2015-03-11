@@ -5,6 +5,7 @@ namespace app\models\base;
 use Yii;
 use yii\db\Expression;
 use yii\behaviors\TimestampBehavior;
+use app\components\behaviors\SlugBehavior;
 
 /**
  * This is the base-model class for table "posts".
@@ -34,7 +35,7 @@ class Post extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title'], 'required'],
+            [['title', 'slug'], 'required'],
             [['content'], 'string'],
             [['category_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
@@ -54,6 +55,7 @@ class Post extends \yii\db\ActiveRecord
             'category_id' => 'Category',
             'created_at'  => 'Created At',
             'updated_at'  => 'Updated At',
+            'slug'        => 'Slug'
         ];
     }
 
@@ -72,6 +74,10 @@ class Post extends \yii\db\ActiveRecord
               'class' => TimestampBehavior::className(),
               'value' => new Expression('NOW()')
           ],
+          [
+            'class'  => SlugBehavior::className(),
+            'source' => 'title'
+          ]
       ];
     }
 }
