@@ -19,7 +19,8 @@ use app\models\PostCategory;
         'horizontalCssClasses'   => [
             'label' => 'col-sm-2'
         ]
-    ]
+    ],
+    'options' => ['enctype' => 'multipart/form-data']
 ]) ?>
 
     <?= $form->errorSummary($model); ?>
@@ -29,6 +30,7 @@ use app\models\PostCategory;
     <?= $form->field($model, 'slug')->textInput(['maxlength' => 255]) ?>
 	<?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 	<?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map(PostCategory::find()->asArray()->all(), 'id', 'name'), ['prompt' => 'Caltegory']) ?>
+    <?= $form->field($model, 'image')->fileInput() ?>
 
     <hr/>
 

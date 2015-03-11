@@ -6,6 +6,7 @@ use Yii;
 use yii\db\Expression;
 use yii\behaviors\TimestampBehavior;
 use app\components\behaviors\SlugBehavior;
+use app\components\behaviors\ImageBehavior;
 
 /**
  * This is the base-model class for table "posts".
@@ -16,6 +17,8 @@ use app\components\behaviors\SlugBehavior;
  * @property integer $category_id
  * @property string $created_at
  * @property string $updated_at
+ * @property string $slug
+ * @property string $image
  *
  * @property PostCategory $category
  */
@@ -39,7 +42,8 @@ class Post extends \yii\db\ActiveRecord
             [['content'], 'string'],
             [['category_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['title'], 'string', 'max' => 255]
+            [['title'], 'string', 'max' => 255],
+            [['image'], 'file', 'skipOnEmpty' => true, 'mimeTypes' => ['image/png', 'image/jpeg']]
         ];
     }
 
@@ -77,6 +81,15 @@ class Post extends \yii\db\ActiveRecord
           [
             'class'  => SlugBehavior::className(),
             'source' => 'title'
+          ],
+          [
+            'class'      => ImageBehavior::className(),
+            'url'        => Yii::getAlias("@web/uploads/posts/"),
+            'folder'     => Yii::getAlias("@webroot/uploads/posts/"),
+            'thumbnails' => [
+              's' => [100, 100],
+              'm' => [300, 300]
+            ]
           ]
       ];
     }

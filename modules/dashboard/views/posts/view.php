@@ -38,6 +38,11 @@ $this->params['breadcrumbs'][] = 'View';
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
+            [   
+                'attribute' => 'image',
+                'format'    => 'html',
+                'value'     => Html::img($model->getSrc('s'))
+            ],
     		'id',
     		'title',
             'slug',

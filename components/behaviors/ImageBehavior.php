@@ -15,24 +15,7 @@ class ImageBehavior extends Behavior
 	public $url        = '';
 	public $thumbnails = [];
 
-	protected $currentImage = '';
-
-	public function init()
-	{
-		parent::init();
-
-		if (empty($this->folder))
-		{
-			$this->folder = "@webroot/uploads/" . $this->owner->tableName() . '/';
-		}
-
-		if (empty($this->url))
-		{
-			$this->url = "@webroot/uploads/" . $this->owner->tableName() . '/';
-		}
-
-		$this->currentImage = $this->owner->{$this->attribute};
-	}
+	protected $oldImage = '';
 
 	public function events()
 	{
@@ -46,14 +29,29 @@ class ImageBehavior extends Behavior
 
 	public function assignImage()
 	{
+		$this->oldImage = $this->owner->getOldAttribute($this->attribute);
+
 		$this->owner->{$this->attribute} = UploadedFile::getInstance($this->owner, $this->attribute);
 	}
 
 	public function saveImage()
 	{
-		if ($this->owner->{$this->attribute})
+		if ($this->owner->{$this->attribute} instanceof UploadedFile)
 		{
+			$file     = $this->owner->{$this->attribute};
+			$newName = substr(md5($file->baseName . time()), 10) . '.' . $file->extension;
 
+			$file->saveAs($this->folder . $newName );
+
+			foreach($this->thumbnails as $prefix => $size)
+			{
+				list($width, $height) = $size;
+
+				Image::thumbnail($this->folder . $newName, $width, $height)
+    				->save($this->folder . $prefix . $newName);
+			}
+
+			$this->owner->{$this->attribute} = $newName;
 		}
 	}
 
@@ -61,30 +59,43 @@ class ImageBehavior extends Behavior
 	{
 		if ($this->owner->{$this->attribute} instanceof UploadedFile)
 		{
-
+			$this->deleteImage($this->oldImage);
+			$this->saveImage();
 		}
 	}
 
-	public function deleteImage($filename = '')
+	public function deleteImage($fileName = '')
 	{
-		if (empty($filename))
+		if (empty($fileName))
 		{
-			$filename = $this->owner->{$this->attribute};
+			$fileName = $this->owner->{$this->attribute};
 		}
 
 		foreach(array_keys($this->thumbnails) as $prefix)
 		{
-
+			unlink($this->getPath($prefix, $fileName));
 		}
+
+		unlink($this->getPath('', $fileName));
 	}
 
-	public function getSrc($prefix = '')
+	public function getSrc($prefix = '', $fileName = '')
 	{
+		if (empty($fileName))
+		{
+			$fileName = $this->owner->{$this->attribute};
+		}
 
+		return $this->url . $prefix . $fileName;
 	}
 
-	public function getPath($prefix = '')
+	public function getPath($prefix = '', $fileName = '')
 	{
+		if (empty($fileName))
+		{
+			$fileName = $this->owner->{$this->attribute};
+		}
 
+		return $this->folder . $prefix . $fileName;
 	}
 }
