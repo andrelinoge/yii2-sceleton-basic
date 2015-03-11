@@ -7,14 +7,14 @@ use yii\helpers\Html;
 * @var app\models\Post $model
 */
 
-$this->title = 'Create';
+$this->title = 'Create post';
 $this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="col-md-12">
 	<fieldset>
-        <legend><span>Creating post</span></legend>
+        <legend><span><?= Html::encode($this->title) ?></span></legend>
     </fieldset>
 
     <?= $this->render('_form', [

@@ -22,7 +22,7 @@ class PostsController extends Controller
 	public function actionIndex()
 	{
         $searchModel  = new PostSearch;
-        $dataProvider = $searchModel->search($_GET);
+        $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
 
         Url::remember();
 

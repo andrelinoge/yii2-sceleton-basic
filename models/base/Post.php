@@ -3,6 +3,8 @@
 namespace app\models\base;
 
 use Yii;
+use yii\db\Expression;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the base-model class for table "posts".
@@ -61,5 +63,15 @@ class Post extends \yii\db\ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(\app\models\PostCategory::className(), ['id' => 'category_id']);
+    }
+
+    public function behaviors()
+    {
+      return [
+          [
+              'class' => TimestampBehavior::className(),
+              'value' => new Expression('NOW()')
+          ],
+      ];
     }
 }

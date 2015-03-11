@@ -1,4 +1,4 @@
-<?php
+<?
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
 
 <div class="post-category-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <? $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
 
@@ -18,6 +18,6 @@ use yii\widgets\ActiveForm;
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
-    <?php ActiveForm::end(); ?>
+    <? ActiveForm::end(); ?>
 
 </div>

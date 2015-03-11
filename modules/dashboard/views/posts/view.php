@@ -33,18 +33,17 @@ $this->params['breadcrumbs'][] = 'View';
         <?= $model->title ?>    </h3>
 
 
-    <?php $this->beginBlock('\app\models\Post'); ?>
+    <? $this->beginBlock('\app\models\Post'); ?>
 
-    <?php echo DetailView::widget([
-    'model' => $model,
-    'attributes' => [
-    			'id',
-			'title',
-			'content:ntext',
-			'category_id',
-			'created_at',
-			'updated_at',
-    ],
+    <?= DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+    		'id',
+    		'title',
+    		'content:ntext',
+    		'category_id',
+    		'created_at',
+        ],
     ]); ?>
 
     <hr/>

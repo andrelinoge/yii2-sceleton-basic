@@ -10,9 +10,10 @@ $this->title = 'Create Post Category';
 $this->params['breadcrumbs'][] = ['label' => 'Post Categories', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="post-category-create">
-
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="col-md-12">
+	<fieldset>
+        <legend><span><?= Html::encode($this->title) ?></span></legend>
+    </fieldset>
 
     <?= $this->render('_form', [
         'model' => $model,
