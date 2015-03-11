@@ -144,13 +144,13 @@
 	        })
 	    },
 	    tooltips_init: function() {
-	        $(".bs_ttip").tooltip({
-	            container: "body"
-	        })
+	        // $(".bs_ttip").tooltip({
+	        //     container: "body"
+	        // })
 	    },
 	    popover_init: function() {
-	        $(".bs_popup").popover({
-	            container: "body"
-	        })
+	        // $(".bs_popup").popover({
+	        //     container: "body"
+	        // })
 	    }
 	};

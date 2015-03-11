@@ -67,6 +67,19 @@ if (YII_ENV_ENV)
     $config['modules']['gii'] = [
         'class'      => 'yii\gii\Module',
         'allowedIPs' => ['*'],
+        'generators' => [
+            // generator name
+            'giiant-model' => [
+                //generator class
+                'class'     => 'schmunk42\giiant\model\Generator',
+                //setting for out templates
+                'templates' => [
+                    // template name => path to template
+                    'mymodel' =>
+                        '@app/giiTemplates/model/default',
+                ]
+            ]
+        ],
     ];
 }
 

@@ -17,8 +17,8 @@ class m150311_041635_post_category_table extends Migration
         }
  
         $this->createTable(self::TABLE_NAME, [
-            'id'          => Schema::TYPE_PK,
-            'name'       => Schema::TYPE_STRING . ' NOT NULL',
+            'id'   => Schema::TYPE_PK,
+            'name' => Schema::TYPE_STRING . ' NOT NULL'
         ], $tableOptions);
     }
 
