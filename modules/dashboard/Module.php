@@ -7,6 +7,7 @@ use Yii;
 class Module extends \yii\base\Module
 {
     public $controllerNamespace = 'app\modules\dashboard\controllers';
+    public $layout = 'main'; // in layouts folder of module
 
     public function init()
     {
