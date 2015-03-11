@@ -1,10 +1,11 @@
 <?php
+use yii;
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
+use yii\widgets\Menu;
 use yii\widgets\Breadcrumbs;
 use app\assets\DashboardAsset;
 use yii\helpers\Url;
+use yii\bootstrap\Alert;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -36,15 +37,7 @@ DashboardAsset::register($this);
             <header id="main_header">
                 <div class="container-fluid">
                     <div class="brand_section">
-                        <a href="dashboard.html"><h4>Back to site</h4></a>
-                    </div>
-                    
-                    <div class="header_user_actions dropdown">
-                        <div class="user_dropdown">
-                            <div class="user_avatar">
-                                <a href="#"><h4>Log out</h4><a>
-                            </div>
-                        </div>
+                        <a href="<?= Url::toRoute('/site/index') ?>" class="white back-to-site"><h4><?= Yii::$app->name ?></h4></a>
                     </div>
                 </div>
             </header>
@@ -65,13 +58,56 @@ DashboardAsset::register($this);
             <!-- main content -->
             <div id="main_wrapper">
                 <div class="container-fluid">
-                    <?= $content ?>
+                	<div class="row">
+	                	<? 
+	                		if (Yii::$app->session->hasFlash('error')) 
+	                		{
+	                			echo Alert::widget ( [
+								    'options' => [
+								        'class' => 'alert-danger'
+								    ],
+								    'body' => Yii::$app->session->getFlash('error')
+								] );
+	                		} 
+	        			?>
+
+	        			<? 
+	                		if (Yii::$app->session->hasFlash('success')) 
+	                		{
+	                			echo Alert::widget ( [
+								    'options' => [
+								        'class' => 'alert-success'
+								    ],
+								    'body' => Yii::$app->session->getFlash('success')
+								] );
+	                		} 
+	        			?>
+        			</div>
+
+        			<div class="row">
+                    	<?= $content ?>
+                    </div>
                 </div>
             </div>
             
             <!-- main menu -->
             <nav id="main_menu">
                 <div class="menu_wrapper">
+	                <?= Menu::widget([
+	                	'itemOptions' => ['class' => 'first_level'],
+	                	'linkTemplate' => '<a href="{url}"><span class="menu-title">{label}</span></a>',
+						'items' => [
+						    ['label' => 'Home', 'url' => ['default/index']],
+						    
+						    ['label' => 'Posts', 'url' => 'javascript:void(0)', 'items' => [
+						        ['label' => 'List', 'url' => ['posts/index']],
+						        ['label' => 'Create new', 'url' => ['posts/new']],
+						    ]],
+
+						    ['label' => 'Log out', 'url' => ['/site/logout']],
+						],
+					]) ?>
+					<? /*
                     <ul>
                         <li class="first_level">
                             <a href="dashboard.html">
@@ -179,6 +215,7 @@ DashboardAsset::register($this);
                             </ul>
                         </li>
                     </ul>
+                    */ ?>
                 </div>
             </nav>
 

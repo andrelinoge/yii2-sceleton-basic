@@ -10,8 +10,8 @@ class DashboardAsset extends AssetBundle
     public $baseUrl  = '@web/modules/dashboard';
 
     public $css = [
+        'css/custom.css',
         'css/main.min.css',
-        'bootstrap/css/bootstrap.min.css',
         'icons/elegant/style.css',
         'icons/elusive/css/elusive-webfont.css',
         'icons/flags/flags.css',
@@ -22,7 +22,6 @@ class DashboardAsset extends AssetBundle
         '../../js/application.js',
         'js/init_theme.js',
         'js/jqueryCookie.min.js',
-        'bootstrap/js/bootstrap.min.js',
         'lib/typeahead/typeahead.bundle.min.js',
         'js/fastclick.min.js',
         'lib/jquery-match-height/jquery.matchHeight-min.js',
@@ -31,6 +30,6 @@ class DashboardAsset extends AssetBundle
 
     public $depends = [
         'yii\web\YiiAsset',
-    //    'yii\bootstrap\BootstrapAsset',
+        'yii\bootstrap\BootstrapAsset',
     ];
 }
