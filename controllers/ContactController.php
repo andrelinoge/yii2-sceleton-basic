@@ -6,7 +6,7 @@ use Yii;
 use yii\web\Controller;
 use app\models\ContactForm;
 
-class SiteController extends Controller
+class ContactController extends Controller
 {
 
     public function actions()

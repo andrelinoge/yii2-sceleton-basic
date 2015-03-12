@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\base\Model;
+use app\models\ContactMessage;
 
 /**
  * ContactForm is the model behind the contact form.
@@ -24,7 +25,7 @@ class ContactForm extends Model
         return [
             [['name', 'email', 'subject', 'body'], 'required'],
             ['email', 'email'],
-            ['verifyCode', 'captcha'],
+            ['verifyCode', 'captcha', 'captchaAction' => 'contact/captcha'],
         ];
     }
 
@@ -47,6 +48,15 @@ class ContactForm extends Model
     {
         if ($this->validate()) 
         {
+            $model = new ContactMessage;
+
+            $model->name    = $this->name;
+            $model->email   = $this->email;
+            $model->subject = $this->subject;
+            $model->content = $this->body;
+
+            $model->save();
+
             Yii::$app->mailer->compose()
                 ->setTo($email)
                 ->setFrom([$this->email => $this->name])

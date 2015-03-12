@@ -1,11 +1,13 @@
 <?php
-use yii;
+
+use \Yii;
 use yii\helpers\Html;
 use yii\widgets\Menu;
 use yii\widgets\Breadcrumbs;
 use app\assets\DashboardAsset;
 use yii\helpers\Url;
 use yii\bootstrap\Alert;
+use app\models\ContactMessage;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -113,6 +115,16 @@ DashboardAsset::register($this);
 						        ['label' => 'Users list', 'url' => ['users/index']],
 						        ['label' => 'Create new user', 'url' => ['users/create']],
 						    ]],
+
+						    [
+						    	'label' => 'Contact messages', 
+						    	'template' => '<a href="{url}"><span class="menu-title">{label}</span><span class="label label-danger">'. ContactMessage::countOfNewMessages(). '</span></a>',
+						    	'url' => 'javascript:void(0)',
+						    	'items' => [
+							        ['label' => 'All mesages', 'url' => ['contact-messages/index']],
+							        ['label' => 'New message', 'url' => ['contact-messages/only-new']],
+							    ]
+					    	],
 
 						    ['label' => 'Log out', 'url' => ['/site/logout']],
 						],
