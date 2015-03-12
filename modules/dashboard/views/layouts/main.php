@@ -111,7 +111,7 @@ DashboardAsset::register($this);
 
 						    ['label' => 'Users', 'url' => 'javascript:void(0)', 'items' => [
 						        ['label' => 'Users list', 'url' => ['users/index']],
-						        ['label' => 'Create new user', 'url' => ['user/create']],
+						        ['label' => 'Create new user', 'url' => ['users/create']],
 						    ]],
 
 						    ['label' => 'Log out', 'url' => ['/site/logout']],

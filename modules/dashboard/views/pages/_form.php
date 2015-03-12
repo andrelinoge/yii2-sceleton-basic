@@ -5,7 +5,7 @@ use yii\bootstrap\ActiveForm;
 
 /**
 * @var yii\web\View $this
-* @var app\models\Post $model
+* @var app\models\Page $model
 * @var yii\bootstrap\ActiveForm $form
 */
 ?>
@@ -28,8 +28,7 @@ use yii\bootstrap\ActiveForm;
 
     <hr/>
 
-    <?= Html::submitButton('<span class="glyphicon glyphicon-check"></span> Save', ['class' => $model->isNewRecord ?
-    'btn btn-primary' : 'btn btn-primary']) ?>
+    <?= Html::submitButton('<span class="glyphicon glyphicon-check"></span> Save', ['class' => 'btn btn-primary']) ?>
     <?= Html::a('Cancel', \yii\helpers\Url::previous(), ['class' => 'btn btn-default']) ?>
 
 <? ActiveForm::end(); ?>

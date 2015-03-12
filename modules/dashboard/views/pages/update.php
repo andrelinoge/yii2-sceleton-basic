@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 /**
  * @var yii\web\View $this
- * @var app\models\Post $model
+ * @var app\models\Page $model
  */
 
 $this->title = 'Page update ' . $model->title . '';

@@ -46,7 +46,7 @@ AppAsset::register($this);
                             'url' => ['/site/logout'],
                             'linkOptions' => ['data-method' => 'post']
                         ],
-                        ['label' => 'Dashboard', 'url' => ['/dashboard/default/index'], 'visible' => yii::$app->user->identity->isAdmin()] 
+                        ['label' => 'Dashboard', 'url' => ['/dashboard/default/index'], 'visible' => !yii::$app->user->isGuest && yii::$app->user->identity->isAdmin()] 
                     ],
                 ]
             );
