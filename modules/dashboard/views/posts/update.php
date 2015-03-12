@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = 'Edit';
 
 <div class="col-md-12">
 	<fieldset>
-        <legend><span>Creating post</span></legend>
+        <legend><span>Updating post</span></legend>
     </fieldset>
 
     <?= $this->render('_form', [

@@ -22,6 +22,7 @@ use yii\db\Expression;
  * @property string $password_reset_token
  * @property string $email
  * @property integer $role
+ * @property integer $is_email_confirmed
  */
 
 class User extends ActiveRecord implements IdentityInterface
@@ -60,6 +61,7 @@ class User extends ActiveRecord implements IdentityInterface
             'password_reset_token' => 'Password Reset Token',
             'email'                => 'Email',
             'role'                 => 'Role',
+            'is_email_confirmed'   => 'Is email confirmed'
         ];
     }
 
@@ -67,8 +69,8 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             [
-              'class'              => TimestampBehavior::className(),
-              'value'              => new Expression('NOW()')
+              'class' => TimestampBehavior::className(),
+              'value' => new Expression('NOW()')
           ],
         ];
     }
@@ -237,5 +239,12 @@ class User extends ActiveRecord implements IdentityInterface
     public function isAdmin()
     {
         return $this->role === self::ROLE_ADMIN;
+    }
+
+    public function confirmEmail()
+    {
+        $this->is_email_confirmed = true;
+        $this->removeEmailConfirmToken();
+        $this->save();
     }
 }

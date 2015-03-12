@@ -51,6 +51,7 @@ $config = [
         'dashboard' => [
             'class' => 'app\modules\dashboard\Module',
         ],
+        'redactor' => 'yii\redactor\RedactorModule',
     ],
     'params' => $params,
 ];

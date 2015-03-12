@@ -100,6 +100,7 @@ DashboardAsset::register($this);
 	                	'linkTemplate' => '<a href="{url}"><span class="menu-title">{label}</span></a>',
 						'items' => [
 						    ['label' => 'Home', 'url' => ['default/index']],
+						    ['label' => 'Pages', 'url' => ['pages/index']],
 						    
 						    ['label' => 'Posts', 'url' => 'javascript:void(0)', 'items' => [
 						        ['label' => 'List', 'url' => ['posts/index']],

@@ -6,8 +6,6 @@ use app\models\Post;
 use app\models\PostSearch;
 use yii\web\Controller;
 use yii\web\HttpException;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 use yii\helpers\Url;
 
 /**
