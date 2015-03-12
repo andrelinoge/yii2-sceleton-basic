@@ -103,13 +103,15 @@ DashboardAsset::register($this);
 						    ['label' => 'Pages', 'url' => ['pages/index']],
 						    
 						    ['label' => 'Posts', 'url' => 'javascript:void(0)', 'items' => [
-						        ['label' => 'List', 'url' => ['posts/index']],
-						        ['label' => 'Create new', 'url' => ['posts/create']],
+						        ['label' => 'Posts list', 'url' => ['posts/index']],
+						        ['label' => 'Create new post', 'url' => ['posts/create']],
+						        ['label' => 'Categories list', 'url' => ['post-categories/index']],
+						        ['label' => 'Create new category', 'url' => ['post-categories/create']],
 						    ]],
 
-						    ['label' => 'Post categories', 'url' => 'javascript:void(0)', 'items' => [
-						        ['label' => 'List', 'url' => ['post-categories/index']],
-						        ['label' => 'Create new', 'url' => ['post-categories/create']],
+						    ['label' => 'Users', 'url' => 'javascript:void(0)', 'items' => [
+						        ['label' => 'Users list', 'url' => ['users/index']],
+						        ['label' => 'Create new user', 'url' => ['user/create']],
 						    ]],
 
 						    ['label' => 'Log out', 'url' => ['/site/logout']],

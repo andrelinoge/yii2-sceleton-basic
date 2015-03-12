@@ -30,4 +30,9 @@ class Page extends \app\models\base\Page
 
 		return $dataProvider;
 	}
+
+	public static function findBySlug($slug)
+	{
+		return static::findOne(['slug' => $slug]);
+	}
 }
