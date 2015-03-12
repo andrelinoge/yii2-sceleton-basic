@@ -2,7 +2,7 @@
 
 use \Yii;
 use yii\helpers\Html;
-use yii\widgets\Menu;
+use app\components\Menu;
 use yii\widgets\Breadcrumbs;
 use app\assets\DashboardAsset;
 use yii\helpers\Url;
@@ -98,35 +98,61 @@ DashboardAsset::register($this);
             <nav id="main_menu">
                 <div class="menu_wrapper">
 	                <?= Menu::widget([
-	                	'itemOptions' => ['class' => 'first_level'],
-	                	'linkTemplate' => '<a href="{url}"><span class="menu-title">{label}</span></a>',
+						'activeCssClass'  => 'section_active',
+						'activateParents' => true,
+						'linkTemplate'    => '<a href="{url}"><span class="menu-title">{label}</span></a>',
 						'items' => [
-						    ['label' => 'Home', 'url' => ['default/index']],
-						    ['label' => 'Pages', 'url' => ['pages/index']],
-						    
-						    ['label' => 'Posts', 'url' => 'javascript:void(0)', 'items' => [
-						        ['label' => 'Posts list', 'url' => ['posts/index']],
-						        ['label' => 'Create new post', 'url' => ['posts/create']],
-						        ['label' => 'Categories list', 'url' => ['post-categories/index']],
-						        ['label' => 'Create new category', 'url' => ['post-categories/create']],
-						    ]],
-
-						    ['label' => 'Users', 'url' => 'javascript:void(0)', 'items' => [
-						        ['label' => 'Users list', 'url' => ['users/index']],
-						        ['label' => 'Create new user', 'url' => ['users/create']],
-						    ]],
+							[
+								'label'        => 'Dashboard', 
+								'url'          => ['default/index'], 
+								'options'      => ['class' => 'first_level'],
+								'never_active' => true
+					    	],
 
 						    [
-						    	'label' => 'Contact messages', 
-						    	'template' => '<a href="{url}"><span class="menu-title">{label}</span><span class="label label-danger">'. ContactMessage::countOfNewMessages(). '</span></a>',
-						    	'url' => 'javascript:void(0)',
-						    	'items' => [
+								'label'   => 'Static pages', 
+								'url'     => ['pages/index'], 
+								'options' => ['class' => 'first_level'],
+					    	],
+
+						    [
+								'label'   => 'Posts', 
+								'url'     => 'javascript:void(0)', 
+								'options' => ['class' => 'first_level'],
+								'items'   => [
+							        ['label' => 'Posts list', 'url' => ['posts/index']],
+							        ['label' => 'Create new post', 'url' => ['posts/create']],
+							        ['label' => 'Categories list', 'url' => ['post-categories/index']],
+							        ['label' => 'Create new category', 'url' => ['post-categories/create']],
+						    	]
+					    	],
+
+						    [
+								'label'   => 'Users', 
+								'url'     => 'javascript:void(0)', 
+								'options' => ['class' => 'first_level'],
+								'items'   => [
+							        ['label' => 'Users list', 'url' => ['users/index']],
+							        ['label' => 'Create new user', 'url' => ['users/create']],
+						    	]
+					    	],
+
+						    [
+								'label'    => 'Contact messages', 
+								'template' => '<a href="{url}"><span class="menu-title">{label}</span><span class="label label-danger">'. ContactMessage::countOfNewMessages(). '</span></a>',
+								'url'      => 'javascript:void(0)',
+								'options'  => ['class' => 'first_level'],
+								'items'    => [
 							        ['label' => 'All mesages', 'url' => ['contact-messages/index']],
 							        ['label' => 'New message', 'url' => ['contact-messages/only-new']],
 							    ]
 					    	],
 
-						    ['label' => 'Log out', 'url' => ['/site/logout']],
+						    [
+								'label'   => 'Log out', 
+								'url'     => ['/site/logout'], 
+								'options' => ['class' => 'first_level'],
+					    	],
 						],
 					]) ?>
                 </div>
